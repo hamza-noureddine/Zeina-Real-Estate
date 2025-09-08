@@ -5,10 +5,14 @@ import PropertySlideshow from '@/components/PropertySlideshow';
 import { getFeaturedProperties as getSupabaseFeaturedProperties, getRecentProperties } from '@/lib/supabase';
 import { ArrowRight, Award, Users, MapPin } from 'lucide-react';
 import heroImage from '@/assets/hero-house.jpg';
+import { useLanguage } from '@/hooks/useLanguage';
+import { translations } from '@/data/translations';
 
 const Home = () => {
   const [featuredProperties, setFeaturedProperties] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { language, isRTL } = useLanguage();
+  const t = translations[language];
 
   // Transform Supabase property for slideshow format
   const transformProperty = (property: any) => {
@@ -66,7 +70,7 @@ const Home = () => {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-          <p className="text-muted-foreground">Loading properties...</p>
+          <p className="text-muted-foreground">{t.loading}</p>
         </div>
       </div>
     );
@@ -84,26 +88,25 @@ const Home = () => {
         
         <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="max-w-4xl mx-auto fade-in">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-              Find Your Perfect
+            <h1 className={`text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight ${isRTL ? 'text-right' : 'text-left'}`}>
+              {t.findYourPerfect}
               <span className="block text-logo">
-                Home in Lebanon
+                {t.homeInLebanon}
               </span>
             </h1>
             <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed">
-              Discover exceptional properties across Lebanon with Zeina Real Estate.
-              Your trusted partner in finding the perfect home.
+              {t.heroDescription}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button variant="hero" size="lg" asChild>
                 <Link to="/properties">
-                  View All Properties
+                  {t.viewAllProperties}
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Link>
               </Button>
               <Button variant="outline" size="lg" className="bg-white/10 backdrop-blur-sm border-white/20 text-white hover:bg-white/20" asChild>
                 <Link to="/contact">
-                  Schedule Viewing
+                  {t.scheduleViewing}
                 </Link>
               </Button>
             </div>
@@ -120,21 +123,21 @@ const Home = () => {
                 <Award className="w-8 h-8 text-logo-foreground" />
               </div>
               <h3 className="text-3xl font-bold text-primary mb-2">50+</h3>
-              <p className="text-muted-foreground">Premium Properties</p>
+              <p className="text-muted-foreground">{t.premiumProperties}</p>
             </div>
             <div className="text-center fade-in">
               <div className="w-16 h-16 bg-logo rounded-full flex items-center justify-center mx-auto mb-4 shadow-elegant">
                 <Users className="w-8 h-8 text-logo-foreground" />
               </div>
               <h3 className="text-3xl font-bold text-primary mb-2">100+</h3>
-              <p className="text-muted-foreground">Happy Clients</p>
+              <p className="text-muted-foreground">{t.happyClients}</p>
             </div>
             <div className="text-center fade-in">
               <div className="w-16 h-16 bg-logo rounded-full flex items-center justify-center mx-auto mb-4 shadow-elegant">
                 <MapPin className="w-8 h-8 text-logo-foreground" />
               </div>
               <h3 className="text-3xl font-bold text-primary mb-2">All</h3>
-              <p className="text-muted-foreground">Lebanese Regions</p>
+              <p className="text-muted-foreground">{t.lebaneseRegions}</p>
             </div>
           </div>
         </div>
@@ -147,12 +150,11 @@ const Home = () => {
       <section className="py-20 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="max-w-3xl mx-auto fade-in">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Ready to Find Your Perfect Home in Lebanon?
+            <h2 className={`text-3xl md:text-4xl font-bold mb-6 ${isRTL ? 'text-right' : 'text-left'}`}>
+              {t.readyToFind}
             </h2>
             <p className="text-xl text-primary-foreground/90 mb-8">
-              Let Zeina Real Estate guide you through every step of your property journey. 
-              From initial consultation to closing, we're here to make your dreams a reality.
+              {t.ctaDescription}
             </p> 
           </div>
         </div>

@@ -94,7 +94,16 @@ export const translations = {
     statusForRent: 'For Rent',
     statusSold: 'Sold',
     statusRented: 'Rented',
-    logout: 'Logout'
+    logout: 'Logout',
+    
+    // Stats Section
+    premiumProperties: 'Premium Properties',
+    happyClients: 'Happy Clients',
+    lebaneseRegions: 'Lebanese Regions',
+    
+    // CTA Section
+    readyToFind: 'Ready to Find Your Perfect Home in Lebanon?',
+    ctaDescription: 'Let Zeina Real Estate guide you through every step of your property journey. From initial consultation to closing, we\'re here to make your dreams a reality.'
   },
   ar: {
     // Navigation
@@ -191,6 +200,15 @@ export const translations = {
     statusForRent: 'للإيجار',
     statusSold: 'مباع',
     statusRented: 'مؤجر',
-    logout: 'تسجيل الخروج'
+    logout: 'تسجيل الخروج',
+    
+    // Stats Section
+    premiumProperties: 'عقارات مميزة',
+    happyClients: 'عميل سعيد',
+    lebaneseRegions: 'مناطق لبنان',
+    
+    // CTA Section
+    readyToFind: 'مستعد للعثور على منزلك المثالي في لبنان؟',
+    ctaDescription: 'دع زينة للعقارات ترشدك خلال كل خطوة من رحلة العقارات الخاصة بك. من الاستشارة الأولية إلى الإغلاق، نحن هنا لتحقيق أحلامك.'
   }
 };

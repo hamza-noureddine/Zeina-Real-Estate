@@ -10,7 +10,7 @@ import { Switch } from '@/components/ui/switch';
 import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/hooks/useLanguage';
 import { translations } from '@/data/translations';
-import { supabase, Property } from '@/lib/supabase';
+import { supabase, Property, uploadImage, uploadVideo } from '@/lib/supabase';
 import ContentGuidelines from '@/components/ContentGuidelines';
 import DefaultPropertyImage from '@/components/DefaultPropertyImage';
 import { 
@@ -177,21 +177,32 @@ const Admin = () => {
     setIsUploading(true);
     const newImageUrls: string[] = [];
 
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-      if (file.type.startsWith('image/')) {
-        // For now, we'll use a placeholder URL. In production, you'd upload to Supabase Storage
-        const imageUrl = URL.createObjectURL(file);
-        newImageUrls.push(imageUrl);
+    try {
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        if (file.type.startsWith('image/')) {
+          // Create a temporary property ID for upload
+          const tempId = `temp-${Date.now()}-${i}`;
+          const imageUrl = await uploadImage(file, tempId);
+          newImageUrls.push(imageUrl);
+        }
       }
-    }
 
-    setUploadedImages(prev => [...prev, ...newImageUrls]);
-    setIsUploading(false);
-    toast({
-      title: "Images uploaded",
-      description: `${newImageUrls.length} image(s) added successfully`
-    });
+      setUploadedImages(prev => [...prev, ...newImageUrls]);
+      toast({
+        title: "Images uploaded",
+        description: `${newImageUrls.length} image(s) uploaded successfully`
+      });
+    } catch (error) {
+      console.error('Error uploading images:', error);
+      toast({
+        title: "Upload failed",
+        description: "Failed to upload images. Please try again.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsUploading(false);
+    }
   };
 
   const handleVideoUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -201,21 +212,32 @@ const Admin = () => {
     setIsUploading(true);
     const newVideoUrls: string[] = [];
 
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-      if (file.type.startsWith('video/')) {
-        // For now, we'll use a placeholder URL. In production, you'd upload to Supabase Storage
-        const videoUrl = URL.createObjectURL(file);
-        newVideoUrls.push(videoUrl);
+    try {
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        if (file.type.startsWith('video/')) {
+          // Create a temporary property ID for upload
+          const tempId = `temp-${Date.now()}-${i}`;
+          const videoUrl = await uploadVideo(file, tempId);
+          newVideoUrls.push(videoUrl);
+        }
       }
-    }
 
-    setUploadedVideos(prev => [...prev, ...newVideoUrls]);
-    setIsUploading(false);
-    toast({
-      title: "Videos uploaded",
-      description: `${newVideoUrls.length} video(s) added successfully`
-    });
+      setUploadedVideos(prev => [...prev, ...newVideoUrls]);
+      toast({
+        title: "Videos uploaded",
+        description: `${newVideoUrls.length} video(s) uploaded successfully`
+      });
+    } catch (error) {
+      console.error('Error uploading videos:', error);
+      toast({
+        title: "Upload failed",
+        description: "Failed to upload videos. Please try again.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsUploading(false);
+    }
   };
 
   const removeImage = (index: number) => {

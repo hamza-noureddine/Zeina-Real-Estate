@@ -120,6 +120,41 @@ export const getPropertyById = async (id: string) => {
   return data as Property
 }
 
+// Storage functions
+export const uploadImage = async (file: File, propertyId: string): Promise<string> => {
+  const fileExt = file.name.split('.').pop()
+  const fileName = `${propertyId}/${Date.now()}.${fileExt}`
+  
+  const { data, error } = await supabase.storage
+    .from('property-images')
+    .upload(fileName, file)
+
+  if (error) throw error
+
+  const { data: { publicUrl } } = supabase.storage
+    .from('property-images')
+    .getPublicUrl(fileName)
+
+  return publicUrl
+}
+
+export const uploadVideo = async (file: File, propertyId: string): Promise<string> => {
+  const fileExt = file.name.split('.').pop()
+  const fileName = `${propertyId}/${Date.now()}.${fileExt}`
+  
+  const { data, error } = await supabase.storage
+    .from('property-videos')
+    .upload(fileName, file)
+
+  if (error) throw error
+
+  const { data: { publicUrl } } = supabase.storage
+    .from('property-videos')
+    .getPublicUrl(fileName)
+
+  return publicUrl
+}
+
 export const createProperty = async (property: Omit<Property, 'id' | 'created_at' | 'updated_at'>) => {
   const { data, error } = await supabase
     .from('properties')

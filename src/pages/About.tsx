@@ -6,13 +6,18 @@ import {
   Award, Users, Star, Quote, 
   MapPin, Phone, Mail, Clock 
 } from 'lucide-react';
+import { useLanguage } from '@/hooks/useLanguage';
+import { translations } from '@/data/translations';
 
 const About = () => {
+  const { language, isRTL, version } = useLanguage();
+  const t = translations[language];
+  
   const achievements = [
-    { icon: Award, label: 'Awards Won', value: '25+' },
-    { icon: Users, label: 'Happy Families', value: '500+' },
-    { icon: Star, label: 'Years Experience', value: '15+' },
-    { icon: MapPin, label: 'Cities Served', value: '12' },
+    { icon: Award, label: t.awardsWon, value: '25+' },
+    { icon: Users, label: t.happyFamilies, value: '500+' },
+    { icon: Star, label: t.yearsExperience, value: '15+' },
+    { icon: MapPin, label: t.citiesServed, value: '12' },
   ];
 
   const testimonials = [
@@ -37,7 +42,7 @@ const About = () => {
   ];
 
   return (
-    <div className="min-h-screen py-12">
+    <div className="min-h-screen py-12" key={version}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Hero Section */}
         <div className="text-center mb-16 fade-in">

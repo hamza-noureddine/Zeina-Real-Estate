@@ -11,7 +11,7 @@ import { translations } from '@/data/translations';
 const Home = () => {
   const [featuredProperties, setFeaturedProperties] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const { language, isRTL } = useLanguage();
+  const { language, isRTL, version } = useLanguage();
   const t = translations[language];
 
   // Transform Supabase property for slideshow format
@@ -77,7 +77,7 @@ const Home = () => {
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen" key={version}>
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div 

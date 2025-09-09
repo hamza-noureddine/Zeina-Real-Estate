@@ -14,7 +14,7 @@ import {
 
 const Contact = () => {
   const { toast } = useToast();
-  const { language, isRTL } = useLanguage();
+  const { language, isRTL, version } = useLanguage();
   const t = translations[language];
   const [formData, setFormData] = useState({
     name: '',
@@ -85,7 +85,7 @@ const Contact = () => {
   ];
 
   return (
-    <div className="min-h-screen py-12">
+    <div className="min-h-screen py-12" key={version}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className={`text-center mb-16 fade-in ${isRTL ? 'text-right' : 'text-left'}`}>

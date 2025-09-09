@@ -17,6 +17,7 @@ export const useLanguage = () => {
 
   const toggleLanguage = () => {
     const newLanguage = language === 'en' ? 'ar' : 'en';
+    console.log('Toggling language from', language, 'to', newLanguage);
     setLanguage(newLanguage);
     setIsRTL(newLanguage === 'ar');
     localStorage.setItem('language', newLanguage);
@@ -24,6 +25,13 @@ export const useLanguage = () => {
     // Update document direction
     document.documentElement.dir = newLanguage === 'ar' ? 'rtl' : 'ltr';
     document.documentElement.lang = newLanguage;
+    
+    // Force a re-render by updating the document title briefly
+    const originalTitle = document.title;
+    document.title = newLanguage === 'ar' ? 'زينة للعقارات' : 'Zeina Real Estate';
+    setTimeout(() => {
+      document.title = originalTitle;
+    }, 100);
   };
 
   return {

@@ -3,13 +3,13 @@ import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import Logo from '@/components/Logo';
 import { Menu, X, Home, Building2, User, Phone, Languages } from 'lucide-react';
-import { useLanguage } from '@/hooks/useLanguage';
+import { useLanguageContext } from '@/contexts/LanguageContext';
 import { translations } from '@/data/translations';
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
-  const { language, isRTL, toggleLanguage } = useLanguage();
+  const { language, isRTL, toggleLanguage } = useLanguageContext();
   const t = translations[language];
 
   const navItems = [

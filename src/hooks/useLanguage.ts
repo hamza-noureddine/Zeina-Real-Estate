@@ -14,6 +14,7 @@ export const useLanguage = () => {
   const [isRTL, setIsRTL] = useState(false);
   const [version, setVersion] = useState(0); // Version number to force re-renders
   const [forceUpdate, setForceUpdate] = useState(0); // Force update counter
+  const [refreshKey, setRefreshKey] = useState(Date.now()); // Timestamp-based key
 
   useEffect(() => {
     // Check if Arabic is stored in localStorage
@@ -37,6 +38,7 @@ export const useLanguage = () => {
       return newVersion;
     });
     setForceUpdate(prev => prev + 1);
+    setRefreshKey(Date.now()); // Update timestamp
     localStorage.setItem('language', newLanguage);
     
     // Update document direction
@@ -62,12 +64,14 @@ export const useLanguage = () => {
     isRTL,
     version, // Export version for components to use as key
     forceUpdate, // Export force update counter
+    refreshKey, // Export timestamp-based key
     toggleLanguage,
     setLanguage: (lang: Language) => {
       setLanguage(lang);
       setIsRTL(lang === 'ar');
       setVersion(prev => prev + 1); // Increment version to force re-renders
       setForceUpdate(prev => prev + 1);
+      setRefreshKey(Date.now());
       localStorage.setItem('language', lang);
       document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
       document.documentElement.lang = lang;

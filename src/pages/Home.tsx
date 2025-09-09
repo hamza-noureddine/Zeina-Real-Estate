@@ -5,29 +5,17 @@ import PropertySlideshow from '@/components/PropertySlideshow';
 import { getFeaturedProperties as getSupabaseFeaturedProperties, getRecentProperties } from '@/lib/supabase';
 import { ArrowRight, Award, Users, MapPin } from 'lucide-react';
 import heroImage from '@/assets/hero-house.jpg';
-import { useLanguage } from '@/hooks/useLanguage';
+import { useLanguageContext } from '@/contexts/LanguageContext';
 import { translations } from '@/data/translations';
 
 const Home = () => {
   const [featuredProperties, setFeaturedProperties] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const { language, isRTL, version, forceUpdate } = useLanguage();
+  const { language, isRTL } = useLanguageContext();
   const t = translations[language];
   
   // Debug logging
-  console.log('Home page render - Language:', language, 'Version:', version, 'ForceUpdate:', forceUpdate);
-  
-  // Listen for language change events
-  useEffect(() => {
-    const handleLanguageChange = () => {
-      console.log('Language change event received in Home page');
-      // Force a re-render by updating a dummy state
-      setFeaturedProperties(prev => [...prev]);
-    };
-    
-    window.addEventListener('languageChange', handleLanguageChange);
-    return () => window.removeEventListener('languageChange', handleLanguageChange);
-  }, []);
+  console.log('Home page render - Language:', language, 'isRTL:', isRTL);
 
   // Transform Supabase property for slideshow format
   const transformProperty = (property: any) => {
@@ -92,7 +80,7 @@ const Home = () => {
   }
 
   return (
-    <div className="min-h-screen" key={`${version}-${forceUpdate}`}>
+    <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div 

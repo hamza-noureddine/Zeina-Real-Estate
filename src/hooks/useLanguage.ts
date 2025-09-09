@@ -1,11 +1,19 @@
 import { useState, useEffect } from 'react';
 
+// Custom event for language changes
+const LANGUAGE_CHANGE_EVENT = 'languageChange';
+
+export const triggerLanguageChange = () => {
+  window.dispatchEvent(new CustomEvent(LANGUAGE_CHANGE_EVENT));
+};
+
 export type Language = 'en' | 'ar';
 
 export const useLanguage = () => {
   const [language, setLanguage] = useState<Language>('en');
   const [isRTL, setIsRTL] = useState(false);
   const [version, setVersion] = useState(0); // Version number to force re-renders
+  const [forceUpdate, setForceUpdate] = useState(0); // Force update counter
 
   useEffect(() => {
     // Check if Arabic is stored in localStorage
@@ -19,9 +27,16 @@ export const useLanguage = () => {
   const toggleLanguage = () => {
     const newLanguage = language === 'en' ? 'ar' : 'en';
     console.log('Toggling language from', language, 'to', newLanguage);
+    console.log('Current version:', version);
+    
     setLanguage(newLanguage);
     setIsRTL(newLanguage === 'ar');
-    setVersion(prev => prev + 1); // Increment version to force re-renders
+    setVersion(prev => {
+      const newVersion = prev + 1;
+      console.log('Version updated from', prev, 'to', newVersion);
+      return newVersion;
+    });
+    setForceUpdate(prev => prev + 1);
     localStorage.setItem('language', newLanguage);
     
     // Update document direction
@@ -34,17 +49,25 @@ export const useLanguage = () => {
     setTimeout(() => {
       document.title = originalTitle;
     }, 100);
+    
+    // Additional debugging
+    console.log('Language toggle completed. New language:', newLanguage);
+    
+    // Trigger custom event for components to listen to
+    triggerLanguageChange();
   };
 
   return {
     language,
     isRTL,
     version, // Export version for components to use as key
+    forceUpdate, // Export force update counter
     toggleLanguage,
     setLanguage: (lang: Language) => {
       setLanguage(lang);
       setIsRTL(lang === 'ar');
       setVersion(prev => prev + 1); // Increment version to force re-renders
+      setForceUpdate(prev => prev + 1);
       localStorage.setItem('language', lang);
       document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
       document.documentElement.lang = lang;

@@ -121,7 +121,7 @@ const PropertySlideshow: React.FC<PropertySlideshowProps> = ({ properties, class
               </div>
 
               {/* Content Section */}
-              <div className={`p-8 lg:p-12 flex flex-col justify-center ${currentIndex % 2 === 0 ? 'lg:order-2' : 'lg:order-1'} ${isRTL ? 'text-right' : 'text-left'}`}>
+              <div className={`p-8 lg:p-12 flex flex-col justify-center ${currentIndex % 2 === 0 ? 'lg:order-2' : 'lg:order-1'} text-center`}>
                 <div className="max-w-lg">
                   {/* Price */}
                   <div className="mb-4">
@@ -139,7 +139,7 @@ const PropertySlideshow: React.FC<PropertySlideshowProps> = ({ properties, class
                   </h3>
 
                   {/* Location */}
-                  <div className="flex items-center mb-6 text-muted-foreground">
+                  <div className="flex items-center justify-center mb-6 text-muted-foreground">
                     <MapPin className="w-5 h-5 mr-2" />
                     <span className="text-lg">{currentProperty.location}</span>
                   </div>

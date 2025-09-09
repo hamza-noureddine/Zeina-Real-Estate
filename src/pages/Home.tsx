@@ -91,13 +91,13 @@ const Home = () => {
         
         <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="max-w-4xl mx-auto fade-in">
-            <h1 className={`text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight ${isRTL ? 'text-right' : 'text-left'}`}>
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight text-center">
               {t.findYourPerfect}
               <span className="block text-logo">
                 {t.homeInLebanon}
               </span>
             </h1>
-            <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed">
+            <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed text-center">
               {t.heroDescription}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

@@ -64,7 +64,7 @@ const Contact = () => {
     {
       icon: Mail,
       title: t.email,
-      details: ['zeinasleiman@hotmail.com'],
+      details: ['zeinaslaiman435@gmail.com'],
       description: language === 'ar' ? 'نرد خلال 24 ساعة' : 'We respond within 24 hours'
     },
     {

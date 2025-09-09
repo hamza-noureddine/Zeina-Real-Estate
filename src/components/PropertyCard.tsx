@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { MapPin, Bed, Bath, Square, ArrowRight, Image as ImageIcon, Video } from 'lucide-react';
 import { useLanguage } from '@/hooks/useLanguage';
 import { formatPropertyForDisplay } from '@/utils/translationUtils';
+import { getPropertyDisplayInfo } from '@/utils/propertyDisplay';
 import DefaultPropertyImage from '@/components/DefaultPropertyImage';
 
 interface PropertyCardProps {
@@ -55,6 +56,25 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
     videos,
     is_featured: false
   }, language);
+  
+  // Get smart property display info based on property type
+  const propertyData = {
+    property_type: type,
+    bedrooms,
+    bathrooms,
+    area,
+    floors: 0, // Add other fields as needed
+    apartments: 0,
+    rooms: 0,
+    studios: 0,
+    parking: 0,
+    land_area: 0,
+    building_area: 0,
+    total_area: 0,
+    floor: 0
+  };
+  
+  const displayInfo = getPropertyDisplayInfo(propertyData, language);
 
   return (
     <Card className={`property-card overflow-hidden border-0 bg-white group cursor-pointer ${isRTL ? 'text-right' : 'text-left'}`}>
@@ -107,24 +127,20 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
 
         <div className={`flex items-center justify-between text-sm text-muted-foreground mb-4 ${isRTL ? 'flex-row-reverse' : ''}`}>
           <div className={`flex items-center ${isRTL ? 'space-x-reverse space-x-4' : 'space-x-4'}`}>
-            {bedrooms !== null && bedrooms !== undefined && (
-              <div className="flex items-center">
-                <Bed className={`w-4 h-4 ${isRTL ? 'ml-1' : 'mr-1'}`} />
-                <span>{bedrooms}</span>
-              </div>
-            )}
-            {bathrooms !== null && bathrooms !== undefined && (
-              <div className="flex items-center">
-                <Bath className={`w-4 h-4 ${isRTL ? 'ml-1' : 'mr-1'}`} />
-                <span>{bathrooms}</span>
-              </div>
-            )}
-            {area !== null && area !== undefined && (
-              <div className="flex items-center">
-                <Square className={`w-4 h-4 ${isRTL ? 'ml-1' : 'mr-1'}`} />
-                <span>{displayProperty.area_display || `${area} m²`}</span>
-              </div>
-            )}
+            {displayInfo.primaryFields.map((field, index) => {
+              const IconComponent = field.icon === 'bed' ? Bed : 
+                                  field.icon === 'bath' ? Bath : 
+                                  field.icon === 'square' ? Square : 
+                                  field.icon === 'building' ? MapPin : 
+                                  field.icon === 'home' ? MapPin : Square;
+              
+              return (
+                <div key={index} className="flex items-center">
+                  <IconComponent className={`w-4 h-4 ${isRTL ? 'ml-1' : 'mr-1'}`} />
+                  <span>{field.value}</span>
+                </div>
+              );
+            })}
           </div>
         </div>
 

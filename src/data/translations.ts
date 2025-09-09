@@ -103,7 +103,34 @@ export const translations = {
     
     // CTA Section
     readyToFind: 'Ready to Find Your Perfect Home in Lebanon?',
-    ctaDescription: 'Let Zeina Real Estate guide you through every step of your property journey. From initial consultation to closing, we\'re here to make your dreams a reality.'
+    ctaDescription: 'Let Zeina Real Estate guide you through every step of your property journey. From initial consultation to closing, we\'re here to make your dreams a reality.',
+    
+    // Properties Page
+    searchProperties: 'Search properties...',
+    allTypes: 'All Types',
+    sortBy: 'Sort by',
+    newestFirst: 'Newest First',
+    oldestFirst: 'Oldest First',
+    priceLowToHigh: 'Price: Low to High',
+    priceHighToLow: 'Price: High to Low',
+    showingResults: 'Showing {count} properties',
+    noResults: 'No properties match your search criteria',
+    tryAdjusting: 'Try adjusting your search or filters',
+    
+    // About Page
+    aboutTitle: 'About Zeina Real Estate',
+    aboutDescription: 'With over 15 years of experience in Lebanese real estate, we specialize in connecting clients with exceptional properties across Lebanon.',
+    ourStory: 'Our Story',
+    ourValues: 'Our Values',
+    whatClientsSay: 'What Our Clients Say',
+    dontTakeOurWord: 'Don\'t just take our word for it',
+    awardsWon: 'Awards Won',
+    happyFamilies: 'Happy Families',
+    yearsExperience: 'Years Experience',
+    citiesServed: 'Cities Served',
+    excellence: 'Excellence',
+    integrity: 'Integrity',
+    innovation: 'Innovation'
   },
   ar: {
     // Navigation
@@ -209,6 +236,33 @@ export const translations = {
     
     // CTA Section
     readyToFind: 'مستعد للعثور على منزلك المثالي في لبنان؟',
-    ctaDescription: 'دع زينة للعقارات ترشدك خلال كل خطوة من رحلة العقارات الخاصة بك. من الاستشارة الأولية إلى الإغلاق، نحن هنا لتحقيق أحلامك.'
+    ctaDescription: 'دع زينة للعقارات ترشدك خلال كل خطوة من رحلة العقارات الخاصة بك. من الاستشارة الأولية إلى الإغلاق، نحن هنا لتحقيق أحلامك.',
+    
+    // Properties Page
+    searchProperties: 'البحث في العقارات...',
+    allTypes: 'جميع الأنواع',
+    sortBy: 'ترتيب حسب',
+    newestFirst: 'الأحدث أولاً',
+    oldestFirst: 'الأقدم أولاً',
+    priceLowToHigh: 'السعر: من الأقل للأعلى',
+    priceHighToLow: 'السعر: من الأعلى للأقل',
+    showingResults: 'عرض {count} عقار',
+    noResults: 'لا توجد عقارات تطابق معايير البحث',
+    tryAdjusting: 'حاول تعديل البحث أو المرشحات',
+    
+    // About Page
+    aboutTitle: 'حول زينة للعقارات',
+    aboutDescription: 'مع أكثر من 15 عاماً من الخبرة في العقارات اللبنانية، نختص في ربط العملاء بعقارات استثنائية في جميع أنحاء لبنان.',
+    ourStory: 'قصتنا',
+    ourValues: 'قيمنا',
+    whatClientsSay: 'ماذا يقول عملاؤنا',
+    dontTakeOurWord: 'لا تأخذ كلامنا فقط',
+    awardsWon: 'الجوائز المحرزة',
+    happyFamilies: 'عائلات سعيدة',
+    yearsExperience: 'سنوات الخبرة',
+    citiesServed: 'المدن المخدومة',
+    excellence: 'التميز',
+    integrity: 'النزاهة',
+    innovation: 'الابتكار'
   }
 };

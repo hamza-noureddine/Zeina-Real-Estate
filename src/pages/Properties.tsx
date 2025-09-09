@@ -6,6 +6,8 @@ import { Badge } from '@/components/ui/badge';
 // Removed static properties import - using only dynamic data
 import { getProperties } from '@/lib/supabase';
 import { Search, Filter, SlidersHorizontal } from 'lucide-react';
+import { useLanguage } from '@/hooks/useLanguage';
+import { translations } from '@/data/translations';
 
 const Properties = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -13,6 +15,8 @@ const Properties = () => {
   const [sortBy, setSortBy] = useState('price');
   const [allProperties, setAllProperties] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { language, isRTL } = useLanguage();
+  const t = translations[language];
 
   const propertyTypes = ['All', 'Apartment', 'House', 'Villa', 'Commercial', 'Land'];
 

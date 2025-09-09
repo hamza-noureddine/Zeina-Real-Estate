@@ -4,7 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { ChevronLeft, ChevronRight, MapPin, Bed, Bath, Square, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useLanguage } from '@/hooks/useLanguage';
+import { useLanguageContext } from '@/contexts/LanguageContext';
 import { translations } from '@/data/translations';
 
 interface PropertySlideshowProps {
@@ -14,7 +14,7 @@ interface PropertySlideshowProps {
 
 const PropertySlideshow: React.FC<PropertySlideshowProps> = ({ properties, className = '' }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const { language, isRTL } = useLanguage();
+  const { language, isRTL } = useLanguageContext();
   const t = translations[language];
 
   // Auto-advance slideshow every 5 seconds

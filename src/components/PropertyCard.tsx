@@ -4,7 +4,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { MapPin, Bed, Bath, Square, ArrowRight, Image as ImageIcon, Video } from 'lucide-react';
-import { useLanguage } from '@/hooks/useLanguage';
+import { useLanguageContext } from '@/contexts/LanguageContext';
 import { formatPropertyForDisplay } from '@/utils/translationUtils';
 import { getPropertyDisplayInfo } from '@/utils/propertyDisplay';
 import DefaultPropertyImage from '@/components/DefaultPropertyImage';
@@ -38,7 +38,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
   videos,
   description,
 }) => {
-  const { language, isRTL } = useLanguage();
+  const { language, isRTL } = useLanguageContext();
   
   // Format property for display with smart translation
   const displayProperty = formatPropertyForDisplay({

@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import { useToast } from '@/hooks/use-toast';
-import { useLanguage } from '@/hooks/useLanguage';
+import { useLanguageContext } from '@/contexts/LanguageContext';
 import { translations } from '@/data/translations';
 import { supabase, Property, uploadImage, uploadVideo } from '@/lib/supabase';
 import ContentGuidelines from '@/components/ContentGuidelines';
@@ -38,7 +38,7 @@ import {
 const Admin = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { language, isRTL, toggleLanguage } = useLanguage();
+  const { language, isRTL, toggleLanguage } = useLanguageContext();
   const t = translations[language];
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [properties, setProperties] = useState<Property[]>([]);

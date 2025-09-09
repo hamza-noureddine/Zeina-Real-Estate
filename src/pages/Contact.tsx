@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
-import { useLanguage } from '@/hooks/useLanguage';
+import { useLanguageContext } from '@/contexts/LanguageContext';
 import { translations } from '@/data/translations';
 import { formatLebanesePhone } from '@/utils/lebaneseUtils';
 import { 
@@ -14,7 +14,7 @@ import {
 
 const Contact = () => {
   const { toast } = useToast();
-  const { language, isRTL, version } = useLanguage();
+  const { language, isRTL } = useLanguageContext();
   const t = translations[language];
   const [formData, setFormData] = useState({
     name: '',
@@ -85,7 +85,7 @@ const Contact = () => {
   ];
 
   return (
-    <div className="min-h-screen py-12" key={version}>
+    <div className="min-h-screen py-12">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className={`text-center mb-16 fade-in ${isRTL ? 'text-right' : 'text-left'}`}>

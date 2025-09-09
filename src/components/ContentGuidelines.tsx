@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { useLanguage } from '@/hooks/useLanguage';
+import { useLanguageContext } from '@/contexts/LanguageContext';
 import { translations } from '@/data/translations';
 import { getContentGuidelines, checkContentQuality } from '@/utils/translationUtils';
 import { CheckCircle, AlertCircle, Lightbulb, Globe } from 'lucide-react';
@@ -15,7 +15,7 @@ const ContentGuidelines: React.FC<ContentGuidelinesProps> = ({
   property, 
   showQualityCheck = false 
 }) => {
-  const { language, isRTL } = useLanguage();
+  const { language, isRTL } = useLanguageContext();
   const t = translations[language];
   const guidelines = getContentGuidelines(language);
   
